@@ -9,6 +9,9 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.shader.Framebuffer
 import org.lwjgl.BufferUtils
+import org.lwjgl.opengl.ARBFramebufferObject
+import org.lwjgl.opengl.GL11
+import org.lwjgl.opengl.GL12
 import kotlin.math.exp
 import kotlin.math.sqrt
 
