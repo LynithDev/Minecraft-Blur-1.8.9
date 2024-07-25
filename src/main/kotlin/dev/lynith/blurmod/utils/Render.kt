@@ -5,6 +5,7 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.Tessellator
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats
+import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 
 
@@ -12,21 +13,33 @@ object Render {
 
     private inline val mc get() = Minecraft.getMinecraft()
 
-    fun drawQuads() {
-        val sr = ScaledResolution(mc)
-        val width = sr.scaledWidth_double.toFloat()
-        val height = sr.scaledHeight_double.toFloat()
-
+    fun drawQuads(
+        left: Float = 0f,
+        top: Float = 0f,
+        right: Float = ScaledResolution(mc).scaledWidth_double.toFloat(),
+        bottom: Float = ScaledResolution(mc).scaledHeight_double.toFloat(),
+    ) {
         glBegin(GL_QUADS)
         glTexCoord2f(0f, 1f)
-        glVertex2f(0f, 0f)
+        glVertex2f(left, top)
         glTexCoord2f(0f, 0f)
-        glVertex2f(0f, height)
+        glVertex2f(left, bottom)
         glTexCoord2f(1f, 0f)
-        glVertex2f(width, height)
+        glVertex2f(right, bottom)
         glTexCoord2f(1f, 1f)
-        glVertex2f(width, 0f)
+        glVertex2f(right, top)
         glEnd()
+
+//        glBegin(GL_QUADS)
+//        glTexCoord2f(0f, 1f)
+//        glVertex2f(0f, 0f)
+//        glTexCoord2f(0f, 0f)
+//        glVertex2f(0f, height)
+//        glTexCoord2f(1f, 0f)
+//        glVertex2f(width, height)
+//        glTexCoord2f(1f, 1f)
+//        glVertex2f(width, 0f)
+//        glEnd()
     }
 
     // copied from Gui.drawRect lol
